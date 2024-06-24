@@ -20,7 +20,7 @@ class Triangle {
 public:
     Point pnt[3];
 
-    Triangle(Point f, Point s, Point t) {
+    explicit Triangle(Point f, Point s, Point t) {
         pnt[0] = f;
         pnt[1] = s;
         pnt[2] = t;
@@ -28,31 +28,35 @@ public:
 
     // Calculate the area of the triangle
     float area() const {
-        return std::abs((pnt[0].x * (pnt[1].y - pnt[2].y) + pnt[1].x * (pnt[2].y - pnt[0].y) + pnt[2].x * (pnt[0].y - pnt[1].y)) / 2.0f);
+        return std::fabs((pnt[0].x * (pnt[1].y - pnt[2].y) + pnt[1].x * (pnt[2].y - pnt[0].y) + pnt[2].x * (pnt[0].y - pnt[1].y)) / 2.0f);
     }
 
     // Check if a point is inside the triangle
     bool isInside(const Point& p) const {
         float trngl = this->area();
-        float A = std::abs((p.x * (pnt[1].y - pnt[2].y) + pnt[1].x * (pnt[2].y - p.y) + pnt[2].x * (p.y - pnt[1].y)) / 2.0f);
-        A += std::abs((pnt[0].x * (p.y - pnt[2].y) + p.x * (pnt[2].y - pnt[0].y) + pnt[2].x * (pnt[0].y - p.y)) / 2.0f);
-        A += std::abs((pnt[0].x * (pnt[1].y - p.y) + pnt[1].x * (p.y - pnt[0].y) + p.x * (pnt[0].y - pnt[1].y)) / 2.0f);
-        return std::abs(trngl - A) < 1e-5; // Allowable error
+        float A = std::fabs((p.x * (pnt[1].y - pnt[2].y) + pnt[1].x * (pnt[2].y - p.y) + pnt[2].x * (p.y - pnt[1].y)) / 2.0f);
+        A += std::fabs((pnt[0].x * (p.y - pnt[2].y) + p.x * (pnt[2].y - pnt[0].y) + pnt[2].x * (pnt[0].y - p.y)) / 2.0f);
+        A += std::fabs((pnt[0].x * (pnt[1].y - p.y) + pnt[1].x * (p.y - pnt[0].y) + p.x * (pnt[0].y - pnt[1].y)) / 2.0f);
+        return std::fabs(trngl - A) < 1e-5; // Allowable error
     }
 };
 
 int main() {
     sf::RenderWindow window(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "Sierpinski Triangle");
+    if (!window.isOpen()) {
+        std::cerr << "Error creating window\\n";
+        return 1;
+    }
     window.setFramerateLimit(0);
 
     // Define the vertices of the triangle
     Triangle trngl({100, 100}, {700, 100}, {400, 700});
     Point p;
 
-    // Initialize font and text (font can be found in project directory)
+    // Initialize font and text
     sf::Font font;
     if (!font.loadFromFile("Inter-Regular.otf")) {
-        std::cerr << "Error loading font\n";
+        std::cerr << "Error loading font\\n";
         return 1;
     }
 
@@ -69,9 +73,12 @@ int main() {
         p = { static_cast<float>(x_dist(generator)), static_cast<float>(y_dist(generator)) };
     } while (!trngl.isInside(p));
 
-    // Create render texture for drawing points
+    // Create render texture for
     sf::RenderTexture renderTexture;
-    renderTexture.create(WINDOW_WIDTH, WINDOW_HEIGHT);
+    if (!renderTexture.create(WINDOW_WIDTH, WINDOW_HEIGHT)) {
+        std::cerr << "Error creating render texture\\n";
+        return 1;
+    }
     renderTexture.clear(sf::Color::Black);
 
     while (window.isOpen()) {
