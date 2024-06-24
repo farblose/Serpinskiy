@@ -10,21 +10,20 @@ Chaos game method for Sierpinski triangle generation is described not formally b
 4. Select as a new main position a middle point in between the main position and the chosen vertex.
 5. Repeat steps 3 and 4 iteratively.
 
-## Installation without CMake
+## Install and run without CMake
 ```bash
-git clone -q https://github.com/farblose/sierpinski.git && \
-cd sierpinski && \
+git clone -q https://github.com/farblose/Sierpinski.git && \
+cd Sierpinski && \
 sudo apt-get install -y libsfml-dev > /dev/null 2>&1 && \
 g++ -o sierpinski main.cpp -lsfml-graphics -lsfml-window -lsfml-system > /dev/null && \
 chmod ugo+x sierpinski && \
-echo 'Installation is complete'
-```
-## Installation with CMake
-```bash
-
-```
-
-## Usage
-```bash
 ./sierpinski
+```
+## Install and run with CMake
+```bash
+git clone -q https://github.com/farblose/Sierpinski.git && \
+cd Sierpinski/build && \
+cmake .. && \
+make && \
+./main
 ```
