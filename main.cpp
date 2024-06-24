@@ -44,7 +44,7 @@ public:
 int main() {
     sf::RenderWindow window(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "Sierpinski Triangle");
     if (!window.isOpen()) {
-        std::cerr << "Error creating window\\n";
+        std::cerr << "Error creating window\n";
         return 1;
     }
     window.setFramerateLimit(0);
@@ -56,7 +56,7 @@ int main() {
     // Initialize font and text
     sf::Font font;
     if (!font.loadFromFile("Inter-Regular.otf")) {
-        std::cerr << "Error loading font\\n";
+        std::cerr << "Error loading font\n";
         return 1;
     }
 
@@ -73,10 +73,10 @@ int main() {
         p = { static_cast<float>(x_dist(generator)), static_cast<float>(y_dist(generator)) };
     } while (!trngl.isInside(p));
 
-    // Create render texture for
+    // Create render texture for drawing points
     sf::RenderTexture renderTexture;
     if (!renderTexture.create(WINDOW_WIDTH, WINDOW_HEIGHT)) {
-        std::cerr << "Error creating render texture\\n";
+        std::cerr << "Error creating render texture\n";
         return 1;
     }
     renderTexture.clear(sf::Color::Black);
