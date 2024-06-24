@@ -1,4 +1,4 @@
-## sierpinski
+## Sierpinski
 The most effecient Sierpinski triangle chaos game method generator written in C++.
 
 ![alt text](https://raw.githubusercontent.com/farblose/Sierpinski/main/work.gif "Example")
@@ -14,7 +14,7 @@ Chaos game method for Sierpinski triangle generation is described not formally b
 ```bash
 git clone -q https://github.com/farblose/sierpinski.git && \
 cd sierpinski && \
-sudo apt-get install -y libsfml-dev > /dev/null 2&1 && \
+sudo apt-get install -y libsfml-dev > /dev/null 2>&1 && \
 g++ -o sierpinski main.cpp -lsfml-graphics -lsfml-window -lsfml-system > /dev/null && \
 chmod ugo+x sierpinski && \
 echo 'Installation is complete'
