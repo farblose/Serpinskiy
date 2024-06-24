@@ -1,6 +1,8 @@
 ## sierpinski
 The most effecient Sierpinski triangle chaos game method generator written in C++.
 
+![alt text](https://raw.githubusercontent.com/farblose/Sierpinski/main/work.gif "Example")
+
 Chaos game method for Sierpinski triangle generation is described not formally by the following algorithm:
 1. Select three distinct points in a plane and construct an initial triangle with these as the vertices.
 2. Select randomly an initial point inside the triangle area and designate it as a main position.
